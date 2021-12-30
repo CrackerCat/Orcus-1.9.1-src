@@ -293,7 +293,6 @@
     <Compile Include="Exceptionless\ExceptionHandler.cs" />
     <Compile Include="Exceptionless\HardwareIdPlugin.cs" />
     <Compile Include="Licensing\HardwareIdGenerator.cs" />
-    <Compile Include="OrcusActivator.cs" />
     <Compile Include="Licensing\WebserverConnection.cs" />
     <Compile Include="Native\MenuFlags.cs" />
     <Compile Include="Native\NativeMethods.cs" />
@@ -2056,7 +2055,11 @@ xcopy /y /d "$(SolutionDir)packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZ
 
 if $(ConfigurationName) == Publish call "C:\Program Files (x86)\Eziriz\.NET Reactor\dotNET_Reactor.exe" -project "..\..\..\..\.Net Reactor\Project.nrproj" -q -targetfile "$(TargetDir)Orcus.Administration.Protected.exe"
 if $(ConfigurationName) == Publish call "$(ProjectDir)moveFiles.bat"
-if $(ConfigurationName) == Publish call "$(ProjectDir)cleanup.bat"</PostBuildEvent>
+if $(ConfigurationName) == Publish call "$(ProjectDir)cleanup.bat"
+
+<!-- Make the release folder more cleaner -->
+if $(ConfigurationName) == Release call "$(ProjectDir)moveFiles.bat"
+  </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
